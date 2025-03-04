@@ -8,3 +8,5 @@ cmake-build-*
 __pycache__
 compile_commands.json
 CMakeUserPresets.json
+cmakeUserPath.json
+

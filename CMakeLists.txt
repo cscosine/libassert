@@ -79,6 +79,9 @@ endif()
 set(target_name "libassert-lib")
 add_library(${target_name} ${build_type})
 
+set_target_properties(${target_name} PROPERTIES DEBUG_POSTFIX "d")
+
+
 # alias to cause error at configuration time instead of link time if target is missing
 add_library(libassert::assert ALIAS ${target_name})
 
