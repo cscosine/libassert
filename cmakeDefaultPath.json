@@ -29,6 +29,10 @@
       "name": "cmake-path-linux-ninja-release",
       "hidden": true,
       "inherits": [ "cs-libassert-options" ]
+    },
+    {
+      "name": "cmake-path-linux-ninja-multi-config",
+      "hidden": true
     }
   ]
 }
