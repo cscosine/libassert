@@ -21,12 +21,7 @@
       "inherits": [ "cs-libassert-options" ]
     },
     {
-      "name": "cmake-path-linux-ninja-debug",
-      "hidden": true,
-      "inherits": [ "cs-libassert-options" ]
-    },
-    {
-      "name": "cmake-path-linux-ninja-release",
+      "name": "cmake-path-linux-ninja",
       "hidden": true,
       "inherits": [ "cs-libassert-options" ]
     },
