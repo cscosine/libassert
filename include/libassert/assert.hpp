@@ -707,8 +707,10 @@ namespace libassert {
 #define LIBASSERT_PRETTY_FUNCTION_ARG ,libassert::detail::pretty_function_name_wrapper{LIBASSERT_PFUNC}
 #if LIBASSERT_IS_CLANG // -Wall in clang
  #define LIBASSERT_IGNORE_UNUSED_VALUE _Pragma("GCC diagnostic ignored \"-Wunused-value\"")
+ #define LIBASSERT_IGNORE_VARIADIC_WARNING _Pragma("GCC diagnostic ignored \"-Wgnu-zero-variadic-macro-arguments\"")
 #else
  #define LIBASSERT_IGNORE_UNUSED_VALUE
+ #define LIBASSERT_IGNORE_VARIADIC_WARNING
 #endif
 
 #define LIBASSERT_BREAKPOINT_IF_DEBUGGING() \
@@ -730,6 +732,7 @@ namespace libassert {
     do { \
         LIBASSERT_WARNING_PRAGMA_PUSH_CLANG \
         LIBASSERT_IGNORE_UNUSED_VALUE \
+        LIBASSERT_IGNORE_VARIADIC_WARNING \
         LIBASSERT_EXPRESSION_DECOMP_WARNING_PRAGMA_CLANG \
         LIBASSERT_WARNING_PRAGMA_PUSH_GCC \
         LIBASSERT_EXPRESSION_DECOMP_WARNING_PRAGMA_GCC \
@@ -804,6 +807,7 @@ namespace libassert {
     /* must do awful stuff to workaround differences in where gcc and clang allow these directives to go */ \
     LIBASSERT_WARNING_PRAGMA_PUSH_CLANG \
     LIBASSERT_IGNORE_UNUSED_VALUE \
+    LIBASSERT_IGNORE_VARIADIC_WARNING \
     LIBASSERT_EXPRESSION_DECOMP_WARNING_PRAGMA_CLANG \
     LIBASSERT_STMTEXPR( \
         LIBASSERT_WARNING_PRAGMA_PUSH_GCC \
