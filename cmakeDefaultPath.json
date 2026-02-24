@@ -21,6 +21,16 @@
       "inherits": [ "cs-libassert-options" ]
     },
     {
+      "name": "cmake-path-msvc2026-x64",
+      "hidden": true,
+      "inherits": [ "cs-libassert-options" ]
+    },
+    {
+      "name": "cmake-path-msvc2026-x64-LLVM",
+      "hidden": true,
+      "inherits": [ "cs-libassert-options" ]
+    },
+    {
       "name": "cmake-path-linux-ninja",
       "hidden": true,
       "inherits": [ "cs-libassert-options" ]
