@@ -91,7 +91,9 @@ mark_as_advanced(LIBASSERT_INSTALL_CMAKEDIR)
 
 # Enables obtaining cpptrace via find_package instead of using FetchContent to
 # obtain it from the official GitHub repo
-option(LIBASSERT_USE_EXTERNAL_CPPTRACE "Obtain cpptrace via find_package instead of FetchContent" OFF)
+# cscosine: ON, cpptrace is the package of third_party_base_libs (built before libassert): the libassert package does
+# not ship a copy of its own (cpptrace, libdwarf, zstd), which consumers of both would find next to the cpptrace one
+option(LIBASSERT_USE_EXTERNAL_CPPTRACE "Obtain cpptrace via find_package instead of FetchContent" ON)
 
 # Enables the use of the magic_enum library in order to provide better
 # diagnostic messages for enum class types.
