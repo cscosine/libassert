@@ -79,6 +79,16 @@
 #define LIBASSERT_STRINGIFY(x) #x,
 #define LIBASSERT_COMMA ,
 
+// clang, C++17 with -Wpedantic: an assertion without message arguments expands LIBASSERT_MAP and the bodies with an
+// empty __VA_ARGS__ ("must specify at least one argument for '...' parameter of variadic macro"); the diagnostic is
+// reported at the assertion in the user's code, so it is ignored in the expansion (cscosine fork)
+#if LIBASSERT_IS_CLANG
+ #define LIBASSERT_IGNORE_ZERO_VARIADIC_WARNING \
+     _Pragma("GCC diagnostic ignored \"-Wgnu-zero-variadic-macro-arguments\"")
+#else
+ #define LIBASSERT_IGNORE_ZERO_VARIADIC_WARNING
+#endif
+
 #if LIBASSERT_IS_CLANG || LIBASSERT_IS_GCC
  #if LIBASSERT_IS_GCC
   #define LIBASSERT_EXPRESSION_DECOMP_WARNING_PRAGMA \
@@ -211,6 +221,8 @@ LIBASSERT_END_NAMESPACE
             libassert::detail::expression_decomposer{} << expr \
         ); \
         LIBASSERT_WARNING_PRAGMA_POP \
+        LIBASSERT_WARNING_PRAGMA_PUSH \
+        LIBASSERT_IGNORE_ZERO_VARIADIC_WARNING \
         LIBASSERT_ASSERT_MAIN_BODY( \
             expr, \
             name, \
@@ -221,16 +233,20 @@ LIBASSERT_END_NAMESPACE
             LIBASSERT_PRETTY_FUNCTION_ARG, \
             __VA_ARGS__ \
         ) \
+        LIBASSERT_WARNING_PRAGMA_POP \
     } while(0) \
 
 #define LIBASSERT_INVOKE_PANIC(name, type, ...) \
     do { \
+        LIBASSERT_WARNING_PRAGMA_PUSH \
+        LIBASSERT_IGNORE_ZERO_VARIADIC_WARNING \
         LIBASSERT_PANIC_MAIN_BODY( \
             name, \
             type, \
             LIBASSERT_PRETTY_FUNCTION_ARG, \
             __VA_ARGS__ \
         ) \
+        LIBASSERT_WARNING_PRAGMA_POP \
     } while(0)
 
 #if LIBASSERT_IS_CLANG || LIBASSERT_IS_GCC
