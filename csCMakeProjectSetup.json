@@ -1,0 +1,35 @@
+{
+    "version": 10,
+    "$comment": "csCMake presets, sibling layout (presets/layout/sibling.json), plus the macOS values of this library (it does not use csCMake): the oldest macOS its binaries run on, and the csCMake script that records it in the installed package for the consumers (docs/user/presets.md of csCMake, 'Values of a project without csCMake')",
+    "include": [
+        "${sourceParentDir}/csCMake/presets/csCMakeProjectSetup-common.json"
+    ],
+    "configurePresets": [
+        {
+            "name": "cscmake-project-setup",
+            "hidden": true,
+            "inherits": "cscmake-common-project-setup",
+            "environment": {
+                "CSCMAKE_WORKSPACE_ROOT": "${sourceParentDir}",
+                "CSCMAKE_ROOT": "$env{CSCMAKE_WORKSPACE_ROOT}/csCMake",
+                "CSCMAKE_BUILD_SUB_DIR": "$env{CSCMAKE_CSV1_SUB_DIR}"
+            }
+        },
+        {
+            "name": "cscmake-project-setup-linux",
+            "hidden": true
+        },
+        {
+            "name": "cscmake-project-setup-windows",
+            "hidden": true
+        },
+        {
+            "name": "cscmake-project-setup-macos",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_OSX_DEPLOYMENT_TARGET": "13.3",
+                "CMAKE_PROJECT_INCLUDE": "modules/scripts/csRecordMacosDeploymentTarget"
+            }
+        }
+    ]
+}
